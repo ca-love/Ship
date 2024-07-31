@@ -18,11 +18,11 @@ extension RequestProxyProtocol where Response == Request.Response {
         return request.path
     }
 
-    var parameters: Any? {
+    var parameters: Sendable? {
         return request.parameters
     }
 
-    var queryParameters: [String: Any]? {
+    var queryParameters: [String: Sendable]? {
         return request.queryParameters
     }
 
