@@ -4,12 +4,12 @@ import PackageDescription
 
 let package = Package(
     name: "Ship",
-    platforms: [.macOS(.v10_10), .iOS(.v8), .tvOS(.v9), .watchOS(.v2)],
+    platforms: [.macOS(.v13), .iOS(.v16), .tvOS(.v16), .watchOS(.v9)],
     products: [
         .library(name: "Ship", targets: ["Ship"])
     ],
     dependencies: [
-        .package(url: "https://github.com/ishkawa/APIKit.git", .upToNextMinor(from: "5.0.0"))
+        .package(url: "https://github.com/ca-love/APIKit.git", .branch("feature/swift6-concurrency"))
     ],
     targets: [
         .target(name: "Ship", dependencies: ["APIKit"], path: "Ship"),
