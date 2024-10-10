@@ -1,15 +1,16 @@
 import Foundation
+import APIKit
 
-struct RequestProxy<R: Request>: RequestProxyProtocol {
-    typealias Request = R
-    typealias Response = R.Response
+public struct RequestProxy<R: Request>: RequestProxyProtocol {
+    public typealias Request = R
+    public typealias Response = R.Response
 
-    var request: R
-    var baseURL: URL
-    var headerFields: [String: String]
-    var dependency: Dependency
+    public var request: R
+    public var baseURL: URL
+    public var headerFields: [String: String]
+    public var dependency: Dependency
 
-    init(request: Request, dependency: Dependency) {
+    public init(request: Request, dependency: Dependency) {
         self.request = request
         self.dependency = dependency
 
@@ -18,12 +19,12 @@ struct RequestProxy<R: Request>: RequestProxyProtocol {
         headerFields = dependency.buildHeaderFields(request)
     }
 
-    func intercept(urlRequest: URLRequest) throws -> URLRequest {
+    public func intercept(urlRequest: URLRequest) throws -> URLRequest {
         let urlRequest = try dependency.intercept(request: request, urlRequest: urlRequest)
         return try request.intercept(urlRequest: urlRequest)
     }
 
-    func intercept(object: Any, urlResponse: HTTPURLResponse) throws -> Any {
+    public func intercept(object: Any, urlResponse: HTTPURLResponse) throws -> Any {
         let object = try dependency.intercept(request: request, object: object, urlResponse: urlResponse)
         return try request.intercept(object: object, urlResponse: urlResponse)
     }

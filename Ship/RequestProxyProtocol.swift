@@ -1,7 +1,7 @@
 import APIKit
 import Foundation
 
-protocol RequestProxyProtocol: Request {
+public protocol RequestProxyProtocol: Request {
     associatedtype Request: APIKit.Request
 
     var request: Request { get }
@@ -9,7 +9,7 @@ protocol RequestProxyProtocol: Request {
     var headerFields: [String: String] { get }
 }
 
-extension RequestProxyProtocol where Response == Request.Response {
+public extension RequestProxyProtocol where Response == Request.Response {
     var method: HTTPMethod {
         return request.method
     }
